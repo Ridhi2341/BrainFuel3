@@ -2,12 +2,12 @@
 let state = { days: [], slots: [], subjects: [], grid: {} };
 
 const COLOR_MAP = {
-  os:     { bg: '#1e2a4a', text: '#93c5fd' },
-  fcp:    { bg: '#3a2800', text: '#fcd34d' },
-  faa:    { bg: '#2e1f4a', text: '#c4b5fd' },
-  dm:     { bg: '#052e1c', text: '#6ee7b7' },
-  fee:    { bg: '#3b0a14', text: '#fda4af' },
-  custom: { bg: '#1a2a2e', text: '#67e8f9' }
+  os:     { bg: '#516cb4ff', text: '#93c5fd' },
+  fcp:    { bg: '#d49f2cff', text: '#fcd34d' },
+  faa:    { bg: '#7555b1ff', text: '#c4b5fd' },
+  dm:     { bg: '#156040ff', text: '#6ee7b7' },
+  fee:    { bg: '#b12e49ff', text: '#fda4af' },
+  custom: { bg: '#5f97a4ff', text: '#67e8f9' }
 };
 
 const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
