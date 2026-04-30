@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainFuel — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">B</div>
+      <span class="sb-logo-text">BrainFuel</span>
+    </div>
+
+    <nav class="sb-nav">
+      <span class="sb-section-label">Main</span>
+      <a href="index.html" class="sb-item active">
+        <span class="sb-icon">⊞</span>
+        <span class="sb-label">Dashboard</span>
+      </a>
+      <a href="timetable.html" class="sb-item">
+        <span class="sb-icon">📅</span>
+        <span class="sb-label">Timetable</span>
+      </a>
+      <a href="attendance.html" class="sb-item">
+        <span class="sb-icon">📊</span>
+        <span class="sb-label">Attendance</span>
+      </a>
+
+      <div class="sb-divider"></div>
+      <span class="sb-section-label">Tools</span>
+      <button class="sb-item" id="sb-tips-btn" style="background:none;border:none;width:100%;text-align:left;cursor:pointer;">
+        <span class="sb-icon">💡</span>
+        <span class="sb-label">Study tips</span>
+      </button>
+      <button class="sb-item" id="sb-notes-btn" style="background:none;border:none;width:100%;text-align:left;cursor:pointer;">
+        <span class="sb-icon">📓</span>
+        <span class="sb-label">Notebook</span>
+      </button>
+    </nav>
+
+    <div class="sb-bottom">
+      <button class="sb-theme-toggle" id="theme-toggle" type="button">
+        <span class="sb-theme-icon">🌙</span>
+        <span class="sb-theme-label">Dark mode</span>
+      </button>
+      <div class="sb-user">
+        <img id="sb-avatar" class="sb-avatar hidden" src="" alt="avatar" />
+        <div class="sb-user-info">
+          <div class="sb-greeting" id="sb-greeting">Good evening ✦</div>
+        </div>
+        <button class="sb-logout" id="btn-logout" type="button">Sign out</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main content ── -->
+  <div class="main-content">
+    <header class="page-header">
+      <span class="page-header-title">Dashboard</span>
+      <div class="page-header-right">
+        <span id="header-date" style="font-size:12px; color:var(--text-muted);"></span>
+      </div>
+    </header>
+
+    <div class="page-body">
+
+      <!-- Now strip -->
+      <div class="now-strip off fade-up" id="now-strip">
+        <div>
+          <div class="now-tag" id="now-tag">RIGHT NOW</div>
+          <div class="now-subject" id="now-subject">Loading...</div>
+          <div class="now-detail" id="now-detail"></div>
+        </div>
+        <div class="now-time" id="now-time"></div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="grid-4 fade-up" style="margin-bottom:var(--spacing-md);" id="stats-row">
+        <div class="card">
+          <div class="card-label">Subjects</div>
+          <div class="card-value" id="stat-subjects">—</div>
+          <div class="card-sub">this timetable</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Periods/week</div>
+          <div class="card-value" id="stat-periods">—</div>
+          <div class="card-sub">scheduled</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Avg attendance</div>
+          <div class="card-value" id="stat-attendance">—</div>
+          <div class="card-sub" id="stat-att-sub">no data yet</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Today</div>
+          <div class="card-value" id="stat-today">—</div>
+          <div class="card-sub" id="stat-today-sub">periods</div>
+        </div>
+      </div>
+
+      <!-- Today's timetable + Attendance side by side -->
+      <div class="grid-2 fade-up" style="margin-bottom:var(--spacing-md);">
+
+        <!-- Today's schedule -->
+        <div class="card" style="padding:var(--spacing-sm);">
+          <div class="card-label" style="margin-bottom:var(--spacing-xs);">Today's schedule</div>
+          <div id="today-schedule">
+            <div style="font-size:13px; color:var(--text-faint); font-style:italic;">No timetable set up yet. <a href="timetable.html" style="color:var(--accent);">Build one →</a></div>
+          </div>
+        </div>
+
+        <!-- Attendance summary -->
+        <div class="card" style="padding:var(--spacing-sm);">
+          <div class="card-label" style="margin-bottom:var(--spacing-xs);">Attendance</div>
+          <div id="att-summary">
+            <div style="font-size:13px; color:var(--text-faint); font-style:italic;">No attendance data. <a href="attendance.html" style="color:var(--accent);">Add subjects →</a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick actions -->
+      <div class="fade-up">
+        <div class="card-label" style="margin-bottom:var(--spacing-xs);">Quick actions</div>
+        <div style="display:flex; gap:var(--spacing-xs); flex-wrap:wrap;">
+          <a href="timetable.html" class="btn-secondary" style="font-size:13px;">📅 Open timetable</a>
+          <a href="attendance.html" class="btn-secondary" style="font-size:13px;">📊 Update attendance</a>
+          <button class="btn-secondary" id="qa-tips" style="font-size:13px;">💡 Get a study tip</button>
+          <button class="btn-secondary" id="qa-notes" style="font-size:13px;">📓 Open notebook</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Avatar picker -->
+<div class="avatar-overlay hidden" id="avatar-overlay">
+  <div class="avatar-card">
+    <div class="avatar-card-top">
+      <div class="avatar-preview-wrap">
+        <img id="avatar-preview" src="img/bear_3d.png" alt="avatar preview" />
+      </div>
+    </div>
+    <h2 class="avatar-title">Pick your study buddy</h2>
+    <p class="avatar-sub">This little one will keep you company across BrainFuel.</p>
+    <div class="avatar-options" id="avatar-options">
+      <div class="avatar-opt active" data-src="img/bear_3d.png" data-key="bear">
+        <img src="img/bear_3d.png" alt="bear" />
+      </div>
+      <div class="avatar-opt" data-src="img/peacock_3d.png" data-key="peacock">
+        <img src="img/peacock_3d.png" alt="peacock" />
+      </div>
+      <div class="avatar-opt" data-src="img/alien_3d.png" data-key="alien">
+        <img src="img/alien_3d.png" alt="alien" />
+      </div>
+      <div class="avatar-opt" data-src="img/astronaut_3d_default.png" data-key="astronaut">
+        <img src="img/astronaut_3d_default.png" alt="astronaut" />
+      </div>
+    </div>
+    <button class="btn-primary" id="avatar-confirm" type="button" style="width:100%; justify-content:center;">Let's go →</button>
+  </div>
+</div>
+
+<script src="js/sidebar.js"></script>
+<script src="js/tips.js"></script>
+<script src="js/notebook.js"></script>
+<script>
+const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTHS    = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+// ── Date header ──
+const now = new Date();
+document.getElementById('header-date').textContent =
+  DAY_NAMES[now.getDay()] + ', ' + now.getDate() + ' ' + MONTHS[now.getMonth()] + ' ' + now.getFullYear();
+
+// ── Load timetable state ──
+function loadTimetable() {
+  try { return JSON.parse(localStorage.getItem('bf_timetable')); } catch(e) { return null; }
+}
+
+function loadAttendance() {
+  try { return JSON.parse(localStorage.getItem('bf_attendance')) || []; } catch(e) { return []; }
+}
+
+function parseSlotTime(timeStr) {
+  if (!timeStr) return null;
+  const parts = timeStr.split(/\s*(?:–|-|to)\s*/i);
+  if (parts.length < 2) return null;
+  function toMins(t) {
+    t = t.trim();
+    const isPM = /pm/i.test(t);
+    const isAM = /am/i.test(t);
+    t = t.replace(/[apm]/gi,'').trim();
+    let [h,m] = t.split(':').map(Number);
+    if (isNaN(m)) m = 0;
+    if (isPM && h !== 12) h += 12;
+    if (isAM && h === 12) h = 0;
+    return h*60+m;
+  }
+  const ampm = timeStr.match(/(am|pm)$/i);
+  let s = parts[0], e = parts[1];
+  if (ampm && !/[apm]/i.test(s)) s += ampm[0];
+  return { startMins: toMins(s), endMins: toMins(e) };
+}
+
+function nowMins() {
+  const n = new Date();
+  return n.getHours()*60 + n.getMinutes();
+}
+
+function fmtTime(d) {
+  return d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+}
+
+// ── Now strip ──
+function updateNowStrip(tt) {
+  const strip   = document.getElementById('now-strip');
+  const tagEl   = document.getElementById('now-tag');
+  const subjEl  = document.getElementById('now-subject');
+  const detEl   = document.getElementById('now-detail');
+  const timeEl  = document.getElementById('now-time');
+
+  timeEl.textContent = fmtTime(new Date());
+
+  if (!tt || !tt.days || !tt.slots) {
+    strip.className = 'now-strip off fade-up';
+    subjEl.textContent = 'No timetable set up';
+    detEl.textContent  = 'Build your timetable to see live updates';
+    return;
+  }
+
+  const todayName = DAY_NAMES[new Date().getDay()];
+  const dayIdx    = tt.days.indexOf(todayName);
+  const nm        = nowMins();
+
+  if (dayIdx === -1) {
+    strip.className = 'now-strip off fade-up';
+    tagEl.textContent  = 'TODAY';
+    subjEl.textContent = 'No classes — enjoy your day off!';
+    detEl.textContent  = 'Next classes on ' + tt.days[0];
+    return;
+  }
+
+  for (let si = 0; si < tt.slots.length; si++) {
+    const p = parseSlotTime(tt.slots[si].time);
+    if (!p) continue;
+    if (nm >= p.startMins && nm < p.endMins) {
+      const key  = si + '-' + dayIdx;
+      const subj = tt.grid[key] ? tt.subjects.find(s => s.id === tt.grid[key]) : null;
+      strip.className = 'now-strip fade-up';
+      tagEl.textContent  = 'RIGHT NOW';
+      subjEl.textContent = subj ? subj.name + (subj.teacher ? ' · ' + subj.teacher : '') : 'Free period';
+      detEl.textContent  = tt.slots[si].label + ' · ends in ' + (p.endMins - nm) + ' min';
+      return;
+    }
+  }
+
+  strip.className = 'now-strip off fade-up';
+  tagEl.textContent  = 'TODAY';
+  subjEl.textContent = 'No active class right now';
+  detEl.textContent  = todayName + ' · ' + fmtTime(new Date());
+}
+
+// ── Stats ──
+function updateStats(tt, att) {
+  if (tt && tt.subjects) {
+    document.getElementById('stat-subjects').textContent = tt.subjects.length;
+    // count periods per week
+    const totalPeriods = Object.keys(tt.grid || {}).length;
+    document.getElementById('stat-periods').textContent = totalPeriods;
+  }
+
+  if (att && att.length) {
+    const valid = att.filter(s => s.total > 0);
+    if (valid.length) {
+      const avg = Math.round(valid.reduce((a,s) => a + (s.attended/s.total)*100, 0) / valid.length);
+      const el  = document.getElementById('stat-attendance');
+      el.textContent = avg + '%';
+      el.style.color = avg >= 75 ? '#16a34a' : avg >= 60 ? '#d97706' : '#dc2626';
+      document.getElementById('stat-att-sub').textContent = avg >= 75 ? 'safe' : avg >= 60 ? 'borderline' : 'danger';
+    }
+  }
+
+  // today's periods
+  if (tt && tt.days && tt.slots) {
+    const todayName = DAY_NAMES[new Date().getDay()];
+    const dayIdx    = tt.days.indexOf(todayName);
+    if (dayIdx !== -1) {
+      let count = 0;
+      tt.slots.forEach((_,si) => { if (tt.grid[si+'-'+dayIdx]) count++; });
+      document.getElementById('stat-today').textContent = count;
+      document.getElementById('stat-today-sub').textContent = 'periods today';
+    } else {
+      document.getElementById('stat-today').textContent = '—';
+      document.getElementById('stat-today-sub').textContent = 'no class today';
+    }
+  }
+}
+
+// ── Today's schedule ──
+function updateTodaySchedule(tt) {
+  const el = document.getElementById('today-schedule');
+  if (!tt || !tt.days) return;
+
+  const todayName = DAY_NAMES[new Date().getDay()];
+  const dayIdx    = tt.days.indexOf(todayName);
+
+  if (dayIdx === -1) {
+    el.innerHTML = '<div style="font-size:13px;color:var(--text-faint);font-style:italic;">No classes today.</div>';
+    return;
+  }
+
+  const items = tt.slots.map((slot, si) => {
+    const key  = si + '-' + dayIdx;
+    const subj = tt.grid[key] ? tt.subjects.find(s => s.id === tt.grid[key]) : null;
+    return { slot, subj };
+  }).filter(item => item.subj);
+
+  if (!items.length) {
+    el.innerHTML = '<div style="font-size:13px;color:var(--text-faint);font-style:italic;">Nothing scheduled today.</div>';
+    return;
+  }
+
+  const COLOR_MAP = {
+    os:     { bg:'#1e2a4a', text:'#93c5fd' },
+    fcp:    { bg:'#3a2800', text:'#fcd34d' },
+    faa:    { bg:'#2e1f4a', text:'#c4b5fd' },
+    dm:     { bg:'#052e1c', text:'#6ee7b7' },
+    fee:    { bg:'#3b0a14', text:'#fda4af' },
+    custom: { bg:'#1a2a2e', text:'#67e8f9' }
+  };
+
+  el.innerHTML = items.map(({slot, subj}) => {
+    const c = COLOR_MAP[subj.color] || COLOR_MAP.os;
+    return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:11px;color:var(--text-faint);width:32px;flex-shrink:0;">${slot.label}</span>
+      <span style="background:${c.bg};color:${c.text};padding:3px 8px;border-radius:4px;font-size:12px;font-weight:500;">${subj.name}</span>
+      ${slot.time ? `<span style="font-size:11px;color:var(--text-faint);margin-left:auto;">${slot.time}</span>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ── Attendance summary ──
+function updateAttSummary(att) {
+  const el = document.getElementById('att-summary');
+  if (!att || !att.length) return;
+
+  function getBarColor(pct) {
+    if (pct >= 75) return '#22c55e';
+    if (pct >= 60) return '#f59e0b';
+    return '#ef4444';
+  }
+
+  function getWarning(attended, total) {
+    const pct = Math.round((attended/total)*100);
+    if (pct >= 75) {
+      const canMiss = Math.max(0, Math.floor(total - 0.75*total) - (total-attended));
+      return canMiss > 0 ? `✓ ${canMiss} skip${canMiss!==1?'s':''} left` : '⚠ At the limit';
+    }
+    const need = Math.ceil((0.75*total - attended)/0.25);
+    return `⚠ Attend next ${need} class${need!==1?'es':''}`;
+  }
+
+  el.innerHTML = att.slice(0,4).map(s => {
+    if (!s.total) return '';
+    const pct = Math.round((s.attended/s.total)*100);
+    const col = getBarColor(pct);
+    const warn = getWarning(s.attended, s.total);
+    const warnColor = pct >= 75 ? '#16a34a' : pct >= 60 ? '#d97706' : '#dc2626';
+    return `<div style="margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+        <span style="font-size:12px;font-weight:500;color:var(--text);">${s.name}</span>
+        <span style="font-size:12px;font-weight:600;color:${col};">${pct}%</span>
+      </div>
+      <div style="height:5px;background:var(--bg-soft2);border-radius:99px;overflow:hidden;margin-bottom:3px;">
+        <div style="height:100%;width:${pct}%;background:${col};border-radius:99px;transition:width 0.6s;"></div>
+      </div>
+      <div style="font-size:11px;color:${warnColor};">${warn}</div>
+    </div>`;
+  }).join('');
+
+  if (att.length > 4) {
+    el.innerHTML += `<a href="attendance.html" style="font-size:12px;color:var(--accent);">View all ${att.length} subjects →</a>`;
+  }
+}
+
+// ── Quick action buttons ──
+document.getElementById('qa-tips').addEventListener('click', () => {
+  document.getElementById('tip-fab')?.click();
+});
+document.getElementById('qa-notes').addEventListener('click', () => {
+  document.getElementById('nb-fab')?.click();
+});
+document.getElementById('sb-tips-btn')?.addEventListener('click', () => {
+  document.getElementById('tip-fab')?.click();
+});
+document.getElementById('sb-notes-btn')?.addEventListener('click', () => {
+  document.getElementById('nb-fab')?.click();
+});
+
+// ── Init ──
+const tt  = loadTimetable();
+const att = loadAttendance();
+updateNowStrip(tt);
+updateStats(tt, att);
+updateTodaySchedule(tt);
+updateAttSummary(att);
+setInterval(() => updateNowStrip(tt), 60000);
+</script>
+
+</body>
+</html>

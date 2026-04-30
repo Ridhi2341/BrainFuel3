@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainFuel — Timetable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <script src="js/theme.js"></script>
+
+  <link rel="stylesheet" href="css/builder.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">B</div>
+      <span class="sb-logo-text">BrainFuel</span>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section-label">Main</div>
+      <a href="index.html" class="sb-item">
+        <span class="sb-item-icon">⊞</span>
+        <span class="sb-item-label">Dashboard</span>
+      </a>
+      <a href="timetable.html" class="sb-item active">
+        <span class="sb-item-icon">📅</span>
+        <span class="sb-item-label">Timetable</span>
+      </a>
+      <a href="attendance.html" class="sb-item">
+        <span class="sb-item-icon">📊</span>
+        <span class="sb-item-label">Attendance</span>
+      </a>
+      <div class="sb-divider"></div>
+      <div class="sb-section-label">Tools</div>
+      <div class="sb-item" id="sb-tips">
+        <span class="sb-item-icon">💡</span>
+        <span class="sb-item-label">Study tips</span>
+      </div>
+      <div class="sb-item" id="sb-notes">
+        <span class="sb-item-icon">📓</span>
+        <span class="sb-item-label">Notebook</span>
+      </div>
+    </nav>
+    <div class="sb-bottom">
+      <div class="sb-avatar-wrap">
+        <img class="sb-avatar hidden" id="sb-avatar" src="" alt="avatar" />
+        <span class="sb-avatar-name" id="sb-greeting">BrainFuel</span>
+      </div>
+      <button class="sb-theme-btn" id="theme-toggle" type="button">🌙</button>
+      <button class="sb-logout" id="btn-logout" type="button" title="Log out">⏻</button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="topbar">
+      <span class="topbar-title" id="topbar-title">Timetable</span>
+      <div class="topbar-right" id="topbar-actions"></div>
+    </div>
+
+    <!-- Wizard -->
+    <div id="wizard">
+      <div class="page-content">
+
+        <div class="wizard-steps">
+          <div class="wstep active" id="wstep-1">
+            <div class="wstep-num">1</div>
+            <div class="wstep-label">Setup grid</div>
+          </div>
+          <div class="wstep-line"></div>
+          <div class="wstep" id="wstep-2">
+            <div class="wstep-num">2</div>
+            <div class="wstep-label">Add subjects</div>
+          </div>
+          <div class="wstep-line"></div>
+          <div class="wstep" id="wstep-3">
+            <div class="wstep-num">3</div>
+            <div class="wstep-label">Fill timetable</div>
+          </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="wizard-panel" id="panel-1">
+          <h2 class="wizard-title">Set up your grid</h2>
+          <p class="wizard-sub">Define the days and time periods for your timetable.</p>
+          <div class="setup-cols">
+            <div class="setup-block">
+              <div class="setup-block-title">Days of week</div>
+              <div class="days-checkboxes" id="days-check">
+                <label class="day-chk"><input type="checkbox" value="Monday" checked/> Monday</label>
+                <label class="day-chk"><input type="checkbox" value="Tuesday" checked/> Tuesday</label>
+                <label class="day-chk"><input type="checkbox" value="Wednesday" checked/> Wednesday</label>
+                <label class="day-chk"><input type="checkbox" value="Thursday" checked/> Thursday</label>
+                <label class="day-chk"><input type="checkbox" value="Friday" checked/> Friday</label>
+                <label class="day-chk"><input type="checkbox" value="Saturday"/> Saturday</label>
+                <label class="day-chk"><input type="checkbox" value="Sunday"/> Sunday</label>
+              </div>
+            </div>
+            <div class="setup-block">
+              <div class="setup-block-title">Time slots / Periods</div>
+              <div id="slots-list" class="slots-list"></div>
+              <div class="slot-add-row">
+                <input type="text" id="slot-label" class="form-input" placeholder="e.g. P1" />
+                <input type="text" id="slot-time" class="form-input" placeholder="e.g. 9:00–9:50 AM" />
+                <button class="btn-slot-add" id="btn-add-slot" type="button">+ Add</button>
+              </div>
+              <span class="field-error" id="slot-err"></span>
+            </div>
+          </div>
+          <div class="wizard-actions">
+            <button class="btn-primary" id="btn-step1-next" type="button">Next: Add subjects →</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="wizard-panel hidden" id="panel-2">
+          <h2 class="wizard-title">Add your subjects</h2>
+          <p class="wizard-sub">Create subject cards to drag onto the timetable.</p>
+          <div class="subj-form">
+            <div class="form-row-3">
+              <div class="form-group">
+                <label class="form-label">Subject name *</label>
+                <input type="text" class="form-input" id="subj-name" placeholder="e.g. Operating Systems" />
+                <span class="field-error" id="subj-name-err"></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Teacher / Code</label>
+                <input type="text" class="form-input" id="subj-teacher" placeholder="e.g. Mr Sharanjit" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Colour</label>
+                <div class="color-swatches" id="color-swatches">
+                  <div class="swatch active" data-color="os" style="background:#1a2a3a;" title="Blue"></div>
+                  <div class="swatch" data-color="fcp" style="background:#3a1a1a;" title="Red"></div>
+                  <div class="swatch" data-color="faa" style="background:#1a2e1a;" title="Green"></div>
+                  <div class="swatch" data-color="dm" style="background:#2e2010;" title="Amber"></div>
+                  <div class="swatch" data-color="fee" style="background:#2e1a2e;" title="Purple"></div>
+                  <div class="swatch" data-color="custom" style="background:#1a2a2e;" title="Teal"></div>
+                </div>
+              </div>
+            </div>
+            <button class="btn-add-subj" id="btn-add-subj" type="button">+ Add subject</button>
+          </div>
+          <div class="subj-preview-title">Added subjects <span id="subj-count">0</span></div>
+          <div class="subj-preview" id="subj-preview"></div>
+          <span class="field-error" id="subj-list-err"></span>
+          <div class="wizard-actions">
+            <button class="btn-secondary" id="btn-step2-back" type="button">← Back</button>
+            <button class="btn-primary" id="btn-step2-next" type="button">Next: Fill timetable →</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="wizard-panel hidden" id="panel-3">
+          <h2 class="wizard-title">Fill your timetable</h2>
+          <p class="wizard-sub">Drag subjects onto the grid. Click a filled cell to clear it.</p>
+          <div class="builder-layout">
+            <div class="palette" id="palette">
+              <div class="palette-title">Subjects</div>
+              <div class="palette-cards" id="palette-cards"></div>
+              <div class="palette-tip">Drag onto a slot →</div>
+              <div style="margin-top:auto; padding-top:16px;">
+                <button class="btn-save" id="btn-save" type="button">💾 Save</button>
+                <button class="btn-clear-all" id="btn-clear-all" type="button">🗑 Clear all</button>
+              </div>
+            </div>
+            <div class="tt-scroll">
+              <table class="tt" id="tt-grid"></table>
+            </div>
+          </div>
+          <div class="wizard-actions" style="margin-top:16px;">
+            <button class="btn-secondary" id="btn-step3-back" type="button">← Back</button>
+            <button class="btn-primary" id="btn-done" type="button">✓ Done — view timetable</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Final view -->
+    <div id="final-view" class="hidden">
+
+      <div class="now-banner hidden" id="now-banner">
+        <div class="now-banner-inner">
+          <div class="now-left">
+            <span class="now-dot"></span>
+            <div>
+              <div class="now-label">Right now</div>
+              <div class="now-subject" id="now-subject"></div>
+            </div>
+          </div>
+          <div class="now-right">
+            <div class="now-time" id="now-clock"></div>
+            <div class="now-ends" id="now-ends"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="now-banner now-banner-off hidden" id="off-banner">
+        <div class="now-banner-inner">
+          <div class="now-left">
+            <span class="now-dot now-dot-off"></span>
+            <div class="now-label" id="off-label"></div>
+          </div>
+          <div class="now-right">
+            <div class="now-time" id="off-clock"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <div id="final-sub" style="margin-bottom:10px; opacity:0.7;"></div>
+        <div class="tt-wrap" style="margin-bottom:16px;">
+          <table class="tt" id="tt-final"></table>
+        </div>
+        <div class="tt-bottom-row">
+          <div class="tt-legend" id="tt-legend"></div>
+          <div class="year-card" id="year-card"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Confirm modal -->
+<div class="modal-overlay hidden" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">Confirm subject</div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="modal-cancel" type="button">Edit</button>
+      <button class="btn-primary" id="modal-confirm" type="button">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/avatar.js"></script>
+<script src="js/tips.js"></script>
+<script src="js/notebook.js"></script>
+<script src="js/builder.js"></script>
+<script>
+  // Sidebar tool shortcuts
+  document.getElementById('sb-tips').addEventListener('click', () => document.getElementById('tip-fab').click());
+  document.getElementById('sb-notes').addEventListener('click', () => document.getElementById('nb-fab').click());
+</script>
+</body>
+</html>

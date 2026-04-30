@@ -1,0 +1,188 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--bg);
+}
+
+.auth-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-xl);
+  padding: 32px 28px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 32px rgba(44,31,20,0.15);
+  animation: fadeUp 0.4s ease both;
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.auth-brand-mark {
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-heading);
+}
+
+.auth-brand span {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+#tab-login, #tab-signup { display: none; }
+
+.auth-tabs {
+  display: flex;
+  background: var(--bg-soft);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.tab-label {
+  flex: 1;
+  text-align: center;
+  padding: 9px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+#tab-login:checked  ~ .auth-tabs .tab-label[for="tab-login"],
+#tab-signup:checked ~ .auth-tabs .tab-label[for="tab-signup"] {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-panels { position: relative; }
+.auth-panel { display: none; animation: fadeUp 0.25s ease both; }
+.panel-login { display: block; }
+
+#tab-login:checked  ~ .auth-panels .panel-login  { display: block; }
+#tab-signup:checked ~ .auth-panels .panel-signup { display: block; }
+#tab-signup:checked ~ .auth-panels .panel-login  { display: none; }
+
+.auth-heading {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.auth-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.remember-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.remember-label input[type="checkbox"] { accent-color: var(--accent); }
+
+.forgot-link { font-size: 12px; color: var(--accent); }
+.forgot-link:hover { text-decoration: underline; }
+
+.btn-submit {
+  width: 100%;
+  padding: 11px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-submit:hover { background: var(--accent-dark); }
+.btn-submit:active { transform: scale(0.98); }
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+  color: var(--text-faint);
+  font-size: 12px;
+}
+.auth-divider::before,
+.auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.btn-google {
+  width: 100%;
+  padding: 10px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font-size: 13px;
+  font-family: var(--font-body);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: background 0.2s;
+}
+.btn-google:hover { background: var(--bg-soft2); }
+
+.google-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: conic-gradient(#ea4335 0 25%, #fbbc05 25% 50%, #34a853 50% 75%, #4285f4 75%);
+  flex-shrink: 0;
+}
+
+.auth-terms {
+  font-size: 11px;
+  color: var(--text-faint);
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.6;
+}
+.auth-terms a { color: var(--accent); }
+
+.pw-strength {
+  height: 4px;
+  background: var(--bg-soft2);
+  border-radius: 99px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+.pw-bar { height: 100%; width: 0%; border-radius: 99px; transition: width 0.3s, background 0.3s; }
+.pw-label { font-size: 11px; font-weight: 500; margin-top: 3px; display: block; }

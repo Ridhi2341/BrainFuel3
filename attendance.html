@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainFuel — Attendance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <script src="js/theme.js"></script>
+
+  <link rel="stylesheet" href="css/attendance.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">B</div>
+      <span class="sb-logo-text">BrainFuel</span>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section-label">Main</div>
+      <a href="index.html" class="sb-item">
+        <span class="sb-item-icon">⊞</span>
+        <span class="sb-item-label">Dashboard</span>
+      </a>
+      <a href="timetable.html" class="sb-item">
+        <span class="sb-item-icon">📅</span>
+        <span class="sb-item-label">Timetable</span>
+      </a>
+      <a href="attendance.html" class="sb-item active">
+        <span class="sb-item-icon">📊</span>
+        <span class="sb-item-label">Attendance</span>
+      </a>
+      <div class="sb-divider"></div>
+      <div class="sb-section-label">Tools</div>
+      <div class="sb-item" id="sb-tips">
+        <span class="sb-item-icon">💡</span>
+        <span class="sb-item-label">Study tips</span>
+      </div>
+      <div class="sb-item" id="sb-notes">
+        <span class="sb-item-icon">📓</span>
+        <span class="sb-item-label">Notebook</span>
+      </div>
+    </nav>
+    <div class="sb-bottom">
+      <div class="sb-avatar-wrap">
+        <img class="sb-avatar hidden" id="sb-avatar" src="" alt="avatar" />
+        <span class="sb-avatar-name" id="sb-greeting">BrainFuel</span>
+      </div>
+      <button class="sb-theme-btn" id="theme-toggle" type="button">🌙</button>
+      <button class="sb-logout" id="btn-logout" type="button" title="Log out">⏻</button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="topbar">
+      <span class="topbar-title">Attendance</span>
+      <div class="topbar-right">
+        <button class="btn-primary" id="btn-add-subject" type="button">+ Add subject</button>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div class="overall-card hidden" id="overall-card" style="margin-bottom:16px;">
+        <div class="overall-top">
+          <div class="overall-label">Overall attendance</div>
+          <div class="overall-pct" id="overall-pct">—</div>
+        </div>
+        <div class="bar-track" style="margin-top:12px;">
+          <div class="bar-fill" id="overall-bar" style="width:0%"></div>
+        </div>
+        <div class="overall-status" id="overall-status" style="margin-top:8px;"></div>
+      </div>
+
+      <div class="subjects-grid" id="subjects-grid"></div>
+
+      <div class="empty-state hidden" id="empty-state">
+        <div class="empty-icon">📊</div>
+        <div class="empty-title">No subjects yet</div>
+        <div class="empty-sub">Add your first subject to start tracking attendance.</div>
+        <button class="btn-primary" id="btn-add-empty" type="button">+ Add subject</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Add/Edit modal -->
+<div class="modal-overlay hidden" id="add-modal">
+  <div class="modal">
+    <div class="modal-title" id="modal-heading">Add subject</div>
+    <div class="form-group">
+      <label class="form-label">Subject name *</label>
+      <input type="text" class="form-input" id="input-name" placeholder="e.g. Mathematics" />
+      <span class="field-error" id="name-err"></span>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Total classes held</label>
+      <input type="number" class="form-input" id="input-total" placeholder="e.g. 40" min="0" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Classes attended</label>
+      <input type="number" class="form-input" id="input-attended" placeholder="e.g. 32" min="0" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="modal-cancel" type="button">Cancel</button>
+      <button class="btn-primary" id="modal-save" type="button">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/avatar.js"></script>
+<script src="js/tips.js"></script>
+<script src="js/notebook.js"></script>
+<script src="js/attendance.js"></script>
+<script>
+  document.getElementById('sb-tips').addEventListener('click', () => document.getElementById('tip-fab').click());
+  document.getElementById('sb-notes').addEventListener('click', () => document.getElementById('nb-fab').click());
+  document.getElementById('btn-add-empty')?.addEventListener('click', () => document.getElementById('btn-add-subject').click());
+</script>
+</body>
+</html>
