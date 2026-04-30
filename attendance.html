@@ -11,6 +11,7 @@
 
   <link rel="stylesheet" href="css/attendance.css" />
     <link rel="stylesheet" href="css/main.css" />
+  <script src="js/login.js"></script>
 </head>
 <body>
 <div class="app-shell">
@@ -20,22 +21,24 @@
       <div class="sb-logo-mark">B</div>
       <span class="sb-logo-text">BrainFuel</span>
     </div>
+
     <nav class="sb-nav">
-      <div class="sb-section-label">Main</div>
+      <span class="sb-section-label">Main</span>
       <a href="index.html" class="sb-item">
-        <span class="sb-item-icon">⊞</span>
-        <span class="sb-item-label">Dashboard</span>
+        <span class="sb-icon">⊞</span>
+        <span class="sb-label">Dashboard</span>
       </a>
       <a href="timetable.html" class="sb-item">
-        <span class="sb-item-icon">📅</span>
-        <span class="sb-item-label">Timetable</span>
+        <span class="sb-icon">📅</span>
+        <span class="sb-label">Timetable</span>
       </a>
       <a href="attendance.html" class="sb-item active">
-        <span class="sb-item-icon">📊</span>
-        <span class="sb-item-label">Attendance</span>
+        <span class="sb-icon">📊</span>
+        <span class="sb-label">Attendance</span>
       </a>
+
       <div class="sb-divider"></div>
-      <div class="sb-section-label">Tools</div>
+      <span class="sb-section-label">Tools</span>
       <div class="sb-item sb-timer-item" id="sb-timer-menu">
         <span class="sb-item-icon">⏱️</span>
         <span class="sb-item-label">Focus Timer <span id="timer-display" class="timer-inline-display">25:00</span></span>
@@ -53,13 +56,19 @@
         <span class="sb-item-label">Notebook</span>
       </a>
     </nav>
+
     <div class="sb-bottom">
-      <div class="sb-avatar-wrap">
-        <img class="sb-avatar hidden" id="sb-avatar" src="" alt="avatar" />
-        <span class="sb-avatar-name" id="sb-greeting">BrainFuel</span>
+      <button class="sb-theme-toggle" id="theme-toggle" type="button" style="width: 100%; padding: 12px; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; border-radius: 8px; background: var(--bg-soft); border: 1px solid var(--border); color: var(--text); cursor: pointer; transition: all 0.2s;">
+        <span class="sb-theme-icon">🌙</span>
+        <span class="sb-theme-label">Switch Theme</span>
+      </button>
+      <div class="sb-user">
+        <img id="sb-avatar" class="sb-avatar hidden" src="" alt="avatar" />
+        <div class="sb-user-info">
+          <div class="sb-greeting" id="sb-greeting" style="font-size: 14px; font-weight: 600;">Good evening</div>
+        </div>
+        <button class="sb-logout" id="btn-logout" type="button">Sign out</button>
       </div>
-      <button class="sb-theme-btn" id="theme-toggle" type="button">🌙</button>
-      <button class="sb-logout" id="btn-logout" type="button" title="Log out">⏻</button>
     </div>
   </aside>
 

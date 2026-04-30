@@ -126,7 +126,7 @@ button, input, textarea { font-family: inherit; }
 
 /* ── Sidebar ── */
 .sidebar {
-  width: 220px;
+  width: 260px;
   background: var(--sidebar-bg);
   border-right: 1px solid var(--border-mid);
   box-shadow: 4px 0 24px rgba(44,31,20,0.04);
@@ -292,6 +292,9 @@ button, input, textarea { font-family: inherit; }
   font-family: var(--font-heading);
   font-weight: 700;
   color: var(--accent);
+  display: inline-block;
+  width: 100px;
+  text-align: center;
 }
 .sb-timer-controls {
   position: absolute;
@@ -411,7 +414,7 @@ button, input, textarea { font-family: inherit; }
 }
 
 .main-content {
-  margin-left: 220px;
+  margin-left: 260px;
   flex: 1;
   min-height: 100vh;
   display: flex;
@@ -913,10 +916,13 @@ button, input, textarea { font-family: inherit; }
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   width: 100%;
-  max-width: 420px;
-  padding: var(--spacing-sm);
+  max-width: 800px;
+  padding: var(--spacing-md);
   box-shadow: var(--shadow-md);
   animation: fadeUp 0.25s ease both;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .tip-modal-header {
@@ -945,12 +951,42 @@ button, input, textarea { font-family: inherit; }
 }
 .tip-close:hover { color: var(--text); }
 
-/* ── Flashcard ── */
 .tip-card-wrap {
   perspective: 1200px;
-  height: 200px;
-  margin-bottom: var(--spacing-sm);
+  height: 350px;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto var(--spacing-md) auto;
   cursor: pointer;
+}
+
+.avatar-grid {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+.avatar-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: var(--bg-soft);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.avatar-btn:hover {
+  background: var(--bg-soft2);
+  transform: scale(1.1);
+}
+.avatar-btn.selected {
+  border-color: var(--accent);
+  background: var(--bg-card);
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(196,80,26,0.2);
 }
 
 .tip-card {

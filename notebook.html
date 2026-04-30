@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/main.css" />
+  <script src="js/login.js"></script>
 </head>
 <body>
 <div class="app-shell">
@@ -22,7 +23,7 @@
 
     <nav class="sb-nav">
       <span class="sb-section-label">Main</span>
-      <a href="index.html" class="sb-item active">
+      <a href="index.html" class="sb-item">
         <span class="sb-icon">⊞</span>
         <span class="sb-label">Dashboard</span>
       </a>
@@ -56,15 +57,14 @@
     </nav>
 
     <div class="sb-bottom">
-
-      <button class="sb-theme-toggle" id="theme-toggle" type="button">
+      <button class="sb-theme-toggle" id="theme-toggle" type="button" style="width: 100%; padding: 12px; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; border-radius: 8px; background: var(--bg-soft); border: 1px solid var(--border); color: var(--text); cursor: pointer; transition: all 0.2s;">
         <span class="sb-theme-icon">🌙</span>
-        <span class="sb-theme-label">Dark mode</span>
+        <span class="sb-theme-label">Switch Theme</span>
       </button>
       <div class="sb-user">
         <img id="sb-avatar" class="sb-avatar hidden" src="" alt="avatar" />
         <div class="sb-user-info">
-          <div class="sb-greeting" id="sb-greeting">Good evening</div>
+          <div class="sb-greeting" id="sb-greeting" style="font-size: 14px; font-weight: 600;">Good evening</div>
         </div>
         <button class="sb-logout" id="btn-logout" type="button">Sign out</button>
       </div>

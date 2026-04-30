@@ -14,10 +14,42 @@ document.addEventListener("DOMContentLoaded", () => {
     if (greetingEl) greetingEl.textContent = greeting;
   }
 
+  const userAvatar = localStorage.getItem('bf_user_avatar') || '🦉';
+  const userName = localStorage.getItem('bf_user_name');
+
+  // Add avatar next to the 'BrainFuel' title
+  const logoText = document.querySelector('.sb-logo-text');
+  if (loggedIn && logoText && !document.querySelector('.sb-logo-avatar')) {
+    const avatarSpan = document.createElement('span');
+    avatarSpan.className = 'sb-logo-avatar';
+    avatarSpan.textContent = ` ${userAvatar}`;
+    avatarSpan.style.marginLeft = '6px';
+    avatarSpan.style.fontSize = '18px';
+    logoText.parentNode.insertBefore(avatarSpan, logoText.nextSibling);
+  }
+
+  // Update bottom avatar
+  const avatarImg = document.getElementById('sb-avatar');
+  if (avatarImg && loggedIn) {
+    const emojiDiv = document.createElement('div');
+    emojiDiv.className = 'sb-avatar sb-emoji-avatar';
+    emojiDiv.style.fontSize = '18px';
+    emojiDiv.style.display = 'flex';
+    emojiDiv.style.alignItems = 'center';
+    emojiDiv.style.justifyContent = 'center';
+    emojiDiv.style.background = 'var(--bg-soft2)';
+    emojiDiv.textContent = userAvatar;
+    avatarImg.parentNode.replaceChild(emojiDiv, avatarImg);
+  }
+
   if (loggedIn) {
     if (greetingEl) {
       greetingEl.style.display = '';
-      updateGreeting();
+      if (userName) {
+        greetingEl.textContent = `Hello, ${userName}`;
+      } else {
+        updateGreeting();
+      }
     }
     if (logoutBtn) {
       logoutBtn.textContent = 'Sign out';
