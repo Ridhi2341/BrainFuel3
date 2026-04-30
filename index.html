@@ -128,6 +128,27 @@
 
       </div>
 
+      <!-- Zen Focus Timer -->
+      <div class="card fade-up" style="margin-bottom:var(--spacing-md); padding:var(--spacing-md); display:flex; align-items:center; justify-content:space-between; gap:var(--spacing-lg);">
+        <div style="flex:1;">
+          <div class="card-label" style="margin-bottom:var(--spacing-xs);">Zen Focus Timer</div>
+          <div style="font-size:13px; color:var(--text-muted); margin-bottom:var(--spacing-sm);">Stay focused with the Pomodoro technique.</div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-primary" id="timer-start" style="font-size:13px; padding:6px 12px; border-radius:var(--radius-md);">Start Focus</button>
+            <button class="btn-secondary" id="timer-reset" style="font-size:13px; padding:6px 12px; border-radius:var(--radius-md);">Reset</button>
+          </div>
+        </div>
+        <div style="position:relative; width:80px; height:80px; flex-shrink:0;">
+          <svg width="80" height="80" viewBox="0 0 80 80" style="transform: rotate(-90deg);">
+            <!-- Background circle -->
+            <circle cx="40" cy="40" r="36" fill="none" stroke="var(--bg-card)" stroke-width="6" style="filter: brightness(0.85);"></circle>
+            <!-- Progress circle -->
+            <circle id="timer-ring" cx="40" cy="40" r="36" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" style="transition: stroke-dashoffset 1s linear;"></circle>
+          </svg>
+          <div id="timer-display" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; font-family:'Syne', sans-serif;">25:00</div>
+        </div>
+      </div>
+
       <!-- Quick actions -->
       <div class="fade-up">
         <div class="card-label" style="margin-bottom:var(--spacing-xs);">Quick actions</div>
@@ -175,6 +196,7 @@
 <script src="js/sidebar.js"></script>
 <script src="js/tips.js"></script>
 <script src="js/notebook.js"></script>
+<script src="js/timer.js"></script>
 <script>
 const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const MONTHS    = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];

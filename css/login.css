@@ -117,11 +117,11 @@
 
 .btn-submit {
   width: 100%;
-  padding: 11px;
+  padding: 14px;
   background: var(--accent);
   color: #fff;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   font-family: var(--font-body);
   border: none;
   border-radius: var(--radius-md);
@@ -144,10 +144,11 @@
 
 .btn-google {
   width: 100%;
-  padding: 10px;
+  padding: 13px;
   background: var(--bg-soft);
   color: var(--text);
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 500;
   font-family: var(--font-body);
   border: 1px solid var(--border-mid);
   border-radius: var(--radius-md);
