@@ -85,6 +85,13 @@ function fmtTime(date) {
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
+function formatDuration(mins) {
+  if (mins < 60) return mins + ' min' + (mins !== 1 ? 's' : '');
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return h + 'h ' + m + 'm';
+}
+
 // ── Current period detection ─────────────────────────────────────
 function detectCurrentPeriod() {
   const todayName = DAY_NAMES[new Date().getDay()];
@@ -162,7 +169,7 @@ function updateNowBanner() {
     const subjName = result.subj ? result.subj.name : 'Free period';
     const teacher  = result.subj?.teacher ? ' · ' + result.subj.teacher : '';
     nowSubject.textContent = subjName + teacher + ' — ' + result.slot.label;
-    nowEnds.textContent = 'Ends in ' + result.minsLeft + ' min' + (result.minsLeft !== 1 ? 's' : '');
+    nowEnds.textContent = 'Ends in ' + formatDuration(result.minsLeft);
     nowClock.textContent = timeStr;
 
     // highlight active cell in table
@@ -174,7 +181,7 @@ function updateNowBanner() {
     dot.style.background = 'var(--accent)';
     nowBanner.style.borderColor = 'var(--border)';
     const nextName = result.nextSubj ? result.nextSubj.name : 'Free period';
-    nowSubject.textContent = 'Break — ' + nextName + ' in ' + result.minsUntil + ' min' + (result.minsUntil !== 1 ? 's' : '');
+    nowSubject.textContent = 'Break — ' + nextName + ' in ' + formatDuration(result.minsUntil);
     nowEnds.textContent = result.nextSlot.label + (result.nextSlot.time ? ' · ' + result.nextSlot.time : '');
     nowClock.textContent = timeStr;
 
@@ -183,7 +190,7 @@ function updateNowBanner() {
     const dot = nowBanner.querySelector('.now-dot');
     dot.style.background = 'var(--accent)';
     nowBanner.style.borderColor = 'var(--border)';
-    nowSubject.textContent = 'First class in ' + result.minsUntil + ' min' + (result.minsUntil !== 1 ? 's' : '');
+    nowSubject.textContent = 'First class in ' + formatDuration(result.minsUntil);
     nowEnds.textContent = result.nextSlot.label + (result.nextSlot.time ? ' · ' + result.nextSlot.time : '');
     nowClock.textContent = timeStr;
 

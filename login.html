@@ -154,7 +154,10 @@
       else if (!isValidEmail(email)) { markInvalid('l-email','l-email-err','Enter a valid email.'); valid = false; }
       if (!pw) { markInvalid('l-pw','l-pw-err','Password is required.'); valid = false; }
       else if (pw.length < 8) { markInvalid('l-pw','l-pw-err','Minimum 8 characters.'); valid = false; }
-      if (valid) window.location.href = 'index.html';
+      if (valid) {
+        localStorage.setItem('bf_logged_in', 'true');
+        window.location.href = 'index.html';
+      }
     });
 
     document.getElementById('btn-signup').addEventListener('click', function() {
@@ -174,7 +177,10 @@
       else if (pw.length < 8) { markInvalid('s-pw','s-pw-err','Minimum 8 characters.'); valid = false; }
       if (!pw2) { markInvalid('s-pw2','s-pw2-err','Please confirm password.'); valid = false; }
       else if (pw && pw !== pw2) { markInvalid('s-pw2','s-pw2-err','Passwords do not match.'); valid = false; }
-      if (valid) window.location.href = 'index.html';
+      if (valid) {
+        localStorage.setItem('bf_logged_in', 'true');
+        window.location.href = 'index.html';
+      }
     });
 
     document.querySelectorAll('.form-input').forEach(function(input) {

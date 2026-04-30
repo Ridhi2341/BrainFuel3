@@ -36,14 +36,22 @@
       </a>
       <div class="sb-divider"></div>
       <div class="sb-section-label">Tools</div>
-      <div class="sb-item" id="sb-tips">
+      <div class="sb-item sb-timer-item" id="sb-timer-menu">
+        <span class="sb-item-icon">⏱️</span>
+        <span class="sb-item-label">Focus Timer <span id="timer-display" class="timer-inline-display">25:00</span></span>
+        <div class="sb-timer-controls" id="timer-controls">
+          <button class="timer-icon-btn" id="timer-start" title="Start/Pause">▶</button>
+          <button class="timer-icon-btn" id="timer-reset" title="Reset">↺</button>
+        </div>
+      </div>
+      <a href="study-tips.html" class="sb-item">
         <span class="sb-item-icon">💡</span>
         <span class="sb-item-label">Study tips</span>
-      </div>
-      <div class="sb-item" id="sb-notes">
+      </a>
+      <a href="notebook.html" class="sb-item">
         <span class="sb-item-icon">📓</span>
         <span class="sb-item-label">Notebook</span>
-      </div>
+      </a>
     </nav>
     <div class="sb-bottom">
       <div class="sb-avatar-wrap">
@@ -117,8 +125,6 @@
 <script src="js/notebook.js"></script>
 <script src="js/attendance.js"></script>
 <script>
-  document.getElementById('sb-tips').addEventListener('click', () => document.getElementById('tip-fab').click());
-  document.getElementById('sb-notes').addEventListener('click', () => document.getElementById('nb-fab').click());
   document.getElementById('btn-add-empty')?.addEventListener('click', () => document.getElementById('btn-add-subject').click());
 </script>
 </body>

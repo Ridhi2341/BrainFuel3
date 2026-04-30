@@ -11,11 +11,11 @@
   --bg-soft:      #ede5d8;
   --bg-soft2:     #e4d8c8;
 
-  --sidebar-bg:       #ffffff;
+  --sidebar-bg:       #fdfbf7;
   --sidebar-soft:     var(--bg-soft);
   --sidebar-text:     #2c1f14;
-  --sidebar-muted:    #8c7b6b;
-  --sidebar-faint:    #b8a898;
+  --sidebar-muted:    #5a4030;
+  --sidebar-faint:    #8c7060;
 
   --accent:       #c4501a;
   --accent-dark:  #a83f12;
@@ -285,20 +285,77 @@ button, input, textarea { font-family: inherit; }
 }
 .sb-logout:hover { color: var(--accent); }
 
-/* ── Theme toggle in sidebar ── */
-.sb-theme-toggle {
+/* Sidebar Timer (Inline) */
+.sb-timer-item { position: relative; }
+.timer-inline-display {
+  margin-left: 6px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--accent);
+}
+.sb-timer-controls {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  gap: 4px;
+  background: var(--bg-soft);
+  padding: 2px;
+  border-radius: var(--radius-sm);
+}
+.sb-timer-item:hover .sb-timer-controls {
+  display: flex;
+}
+.timer-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 4px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  background: var(--bg-soft);
-  border: 1px solid var(--border-mid);
-  width: 100%;
-  transition: all 0.2s ease;
-  margin-bottom: 8px;
+}
+.timer-icon-btn:hover {
+  color: var(--accent);
+  background: var(--bg-card);
+}
+
+/* Focus Mode */
+.sidebar.focus-mode {
+  border-right: 1px solid var(--accent);
+  box-shadow: 4px 0 24px rgba(196,80,26,0.2);
+}
+
+/* ── Theme toggle in sidebar ── */
+/* Make the theme toggle bigger and more visible */
+.sb-theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--bg-card); 
+    border: 1px solid var(--accent); 
+    border-radius: 12px;
+    cursor: pointer;
+    width: 90%; 
+    margin: 10px auto;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--text);
+    transition: transform 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.02);
+    background: var(--bg-sidebar);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.4rem; /* Makes the sun/moon icon bigger */
 }
 .sb-theme-toggle:hover { 
   background: var(--bg-card); 

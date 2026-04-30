@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainFuel — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">B</div>
+      <span class="sb-logo-text">BrainFuel</span>
+    </div>
+
+    <nav class="sb-nav">
+      <span class="sb-section-label">Main</span>
+      <a href="index.html" class="sb-item active">
+        <span class="sb-icon">⊞</span>
+        <span class="sb-label">Dashboard</span>
+      </a>
+      <a href="timetable.html" class="sb-item">
+        <span class="sb-icon">📅</span>
+        <span class="sb-label">Timetable</span>
+      </a>
+      <a href="attendance.html" class="sb-item">
+        <span class="sb-icon">📊</span>
+        <span class="sb-label">Attendance</span>
+      </a>
+
+      <div class="sb-divider"></div>
+      <span class="sb-section-label">Tools</span>
+      <div class="sb-item sb-timer-item" id="sb-timer-menu">
+        <span class="sb-item-icon">⏱️</span>
+        <span class="sb-item-label">Focus Timer <span id="timer-display" class="timer-inline-display">25:00</span></span>
+        <div class="sb-timer-controls" id="timer-controls">
+          <button class="timer-icon-btn" id="timer-start" title="Start/Pause">▶</button>
+          <button class="timer-icon-btn" id="timer-reset" title="Reset">↺</button>
+        </div>
+      </div>
+      <a href="study-tips.html" class="sb-item">
+        <span class="sb-item-icon">💡</span>
+        <span class="sb-item-label">Study tips</span>
+      </a>
+      <a href="notebook.html" class="sb-item active">
+        <span class="sb-item-icon">📓</span>
+        <span class="sb-item-label">Notebook</span>
+      </a>
+    </nav>
+
+    <div class="sb-bottom">
+
+      <button class="sb-theme-toggle" id="theme-toggle" type="button">
+        <span class="sb-theme-icon">🌙</span>
+        <span class="sb-theme-label">Dark mode</span>
+      </button>
+      <div class="sb-user">
+        <img id="sb-avatar" class="sb-avatar hidden" src="" alt="avatar" />
+        <div class="sb-user-info">
+          <div class="sb-greeting" id="sb-greeting">Good evening</div>
+        </div>
+        <button class="sb-logout" id="btn-logout" type="button">Sign out</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main content ── -->
+  <div class="main-content">
+    <header class="page-header">
+      <span class="page-header-title">Notebook</span>
+    </header>
+
+    <div class="page-body" style="height: calc(100vh - 100px); display: flex; flex-direction: column;">
+      <div class="nb-panel" style="position:relative; width:100%; height:100%; max-height:none; box-shadow:none; border: 1px solid var(--border); right:0; bottom:0;">
+        <div class="nb-header">
+          <div class="nb-tabs">
+            <button class="nb-tab active" id="nb-tab-notes" type="button">📝 Notes</button>
+            <button class="nb-tab" id="nb-tab-tasks" type="button">✅ Tasks</button>
+          </div>
+        </div>
+        <div class="nb-body" id="nb-body-notes" style="flex:1; display:flex; flex-direction:column;">
+          <textarea class="nb-textarea" id="nb-textarea" placeholder="Dump your thoughts here — ideas, reminders, anything on your mind..." style="flex:1;"></textarea>
+          <div class="nb-note-hint">Auto-saves as you type</div>
+        </div>
+        <div class="nb-body hidden" id="nb-body-tasks" style="flex:1; overflow-y:auto;">
+          <div class="nb-task-input-row">
+            <input type="text" class="nb-task-input" id="nb-task-input" placeholder="Add something to do..." />
+            <button class="nb-task-add" id="nb-task-add" type="button">+</button>
+          </div>
+          <div class="nb-tasks-list" id="nb-tasks-list"></div>
+          <button class="nb-clear-done" id="nb-clear-done" type="button">Clear completed</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Avatar picker -->
+<div class="avatar-overlay hidden" id="avatar-overlay">
+  <div class="avatar-card">
+    <div class="avatar-card-top">
+      <div class="avatar-preview-wrap">
+        <img id="avatar-preview" src="img/bear_3d.png" alt="avatar preview" />
+      </div>
+    </div>
+    <h2 class="avatar-title">Pick your study buddy</h2>
+    <p class="avatar-sub">This little one will keep you company across BrainFuel.</p>
+    <div class="avatar-options" id="avatar-options">
+      <div class="avatar-opt active" data-src="img/bear_3d.png" data-key="bear">
+        <img src="img/bear_3d.png" alt="bear" />
+      </div>
+      <div class="avatar-opt" data-src="img/peacock_3d.png" data-key="peacock">
+        <img src="img/peacock_3d.png" alt="peacock" />
+      </div>
+      <div class="avatar-opt" data-src="img/alien_3d.png" data-key="alien">
+        <img src="img/alien_3d.png" alt="alien" />
+      </div>
+      <div class="avatar-opt" data-src="img/astronaut_3d_default.png" data-key="astronaut">
+        <img src="img/astronaut_3d_default.png" alt="astronaut" />
+      </div>
+    </div>
+    <button class="btn-primary" id="avatar-confirm" type="button" style="width:100%; justify-content:center;">Let's go →</button>
+  </div>
+</div>
+
+<script src="js/sidebar.js"></script>
+<script src="js/tips.js"></script>
+<script src="js/notebook.js"></script>
+<script src="js/timer.js"></script>
+<script>
+  // Notebook specific init will happen via js/notebook.js
+</script>
+
+</body>
+</html>
