@@ -2,6 +2,16 @@
 let subjects = [];
 let editingId = null;
 
+const COLOR_MAP = {
+  mint:     { bg: 'linear-gradient(135deg, rgba(168,230,207,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#A8E6CF' },
+  sky:      { bg: 'linear-gradient(135deg, rgba(161,196,253,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#A1C4FD' },
+  lavender: { bg: 'linear-gradient(135deg, rgba(220,214,247,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#DCD6F7' },
+  peach:    { bg: 'linear-gradient(135deg, rgba(255,211,182,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#FFD3B6' },
+  rose:     { bg: 'linear-gradient(135deg, rgba(255,170,165,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#FFAAA5' }
+};
+
+let selectedColor = 'mint';
+
 function uid() { return Math.random().toString(36).slice(2, 9); }
 
 function saveSubjects() {
@@ -103,8 +113,11 @@ function renderSubjects() {
       }
     }
 
+    const c = COLOR_MAP[s.color] || COLOR_MAP.mint;
     const card = document.createElement('div');
     card.className = 'subject-card';
+    card.style.background = c.bg;
+    card.style.color = c.text;
     card.innerHTML = `
       <div class="sc-header">
         <div class="sc-name">${s.name}</div>
@@ -184,6 +197,10 @@ function openAddModal() {
   document.getElementById('input-total').value = '';
   document.getElementById('input-attended').value = '';
   document.getElementById('name-err').style.display = 'none';
+  selectedColor = 'mint';
+  document.querySelectorAll('#add-modal .swatch').forEach(sw => {
+    sw.classList.toggle('active', sw.dataset.color === 'mint');
+  });
   document.getElementById('add-modal').classList.remove('hidden');
 }
 
@@ -196,6 +213,10 @@ function openEditModal(id) {
   document.getElementById('input-total').value = s.total || '';
   document.getElementById('input-attended').value = s.attended || '';
   document.getElementById('name-err').style.display = 'none';
+  selectedColor = s.color || 'mint';
+  document.querySelectorAll('#add-modal .swatch').forEach(sw => {
+    sw.classList.toggle('active', sw.dataset.color === selectedColor);
+  });
   document.getElementById('add-modal').classList.remove('hidden');
 }
 
@@ -224,9 +245,9 @@ document.getElementById('modal-save').addEventListener('click', () => {
 
   if (editingId) {
     const s = subjects.find(s => s.id === editingId);
-    if (s) { s.name = name; s.total = total; s.attended = attended; }
+    if (s) { s.name = name; s.total = total; s.attended = attended; s.color = selectedColor; }
   } else {
-    subjects.push({ id: uid(), name, total, attended });
+    subjects.push({ id: uid(), name, total, attended, color: selectedColor });
   }
 
   saveSubjects();
@@ -242,5 +263,12 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('modal-cancel').addEventListener('click', closeModal);
   document.getElementById('add-modal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
+  });
+  document.querySelectorAll('#add-modal .swatch').forEach(sw => {
+    sw.addEventListener('click', () => {
+      document.querySelectorAll('#add-modal .swatch').forEach(s => s.classList.remove('active'));
+      sw.classList.add('active');
+      selectedColor = sw.dataset.color;
+    });
   });
 });

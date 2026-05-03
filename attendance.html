@@ -115,6 +115,16 @@
       <span class="field-error" id="name-err"></span>
     </div>
     <div class="form-group">
+      <label class="form-label">Colour</label>
+      <div class="color-swatches" id="att-color-swatches">
+        <div class="swatch active" data-color="mint" style="background:#A8E6CF;" title="Mint"></div>
+        <div class="swatch" data-color="sky" style="background:#A1C4FD;" title="Sky"></div>
+        <div class="swatch" data-color="lavender" style="background:#DCD6F7;" title="Lavender"></div>
+        <div class="swatch" data-color="peach" style="background:#FFD3B6;" title="Peach"></div>
+        <div class="swatch" data-color="rose" style="background:#FFAAA5;" title="Rose"></div>
+      </div>
+    </div>
+    <div class="form-group">
       <label class="form-label">Total classes held</label>
       <input type="number" class="form-input" id="input-total" placeholder="e.g. 40" min="0" />
     </div>
@@ -132,6 +142,7 @@
 <script src="js/avatar.js"></script>
 <script src="js/tips.js"></script>
 <script src="js/notebook.js"></script>
+<script src="js/timer.js"></script>
 <script src="js/attendance.js"></script>
 <script>
   document.getElementById('btn-add-empty')?.addEventListener('click', () => document.getElementById('btn-add-subject').click());

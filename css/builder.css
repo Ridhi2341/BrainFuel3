@@ -73,11 +73,6 @@
 
 .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
 
-.color-swatches { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-.swatch { width: 28px; height: 28px; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: transform 0.15s, border-color 0.15s; }
-.swatch:hover { transform: scale(1.15); }
-.swatch.active { border-color: var(--accent); transform: scale(1.15); }
-
 .btn-add-subj { width: 100%; padding: 10px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; font-family: var(--font-body); cursor: pointer; transition: background 0.15s; }
 .btn-add-subj:hover { background: var(--accent-dark); }
 
@@ -119,13 +114,13 @@
 /* Timetable */
 .tt-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
 
-.tt { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 560px; }
+.tt { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
 
-.tt th { background: var(--bg-soft); padding: 10px; font-weight: 500; text-align: center; color: var(--text-muted); border-bottom: 1px solid var(--border); font-size: 12px; letter-spacing: 0.03em; }
+.tt th { background: var(--bg-soft); padding: 10px; font-weight: 500; text-align: center; color: var(--text-muted); border-bottom: 1px solid var(--border); font-size: 14px; letter-spacing: 0.03em; }
 .tt th.today-head { background: var(--accent-light); color: var(--accent); }
 
 .tt td { padding: 8px 7px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); text-align: center; vertical-align: middle; }
-.tt td.time-cell { font-size: 12px; color: var(--text-muted); font-weight: 600; background: var(--bg-soft); text-align: left; padding: 12px 16px; width: 130px; white-space: nowrap; line-height: 1.6; }
+.tt td.time-cell { font-size: 14px; color: var(--text-muted); font-weight: 600; background: var(--bg-soft); text-align: left; padding: 12px 16px; width: 130px; white-space: nowrap; line-height: 1.6; }
 .tt tr:last-child td { border-bottom: none; }
 .tt td:last-child { border-right: none; }
 .tt td.today-col { background: rgba(196,80,26,0.05); }

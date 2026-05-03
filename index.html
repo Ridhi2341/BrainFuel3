@@ -137,51 +137,32 @@
 
       </div>
 
-      <!-- Daily Focus & Weekly Progress -->
-      <div class="grid-2 fade-up" style="margin-bottom:var(--spacing-md);">
-        
-        <div class="card" style="padding:var(--spacing-sm);">
-          <div class="card-label" style="margin-bottom:var(--spacing-xs);">Daily Focus</div>
-          <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:40px; height:40px; border-radius:50%; background:var(--bg-soft); display:flex; align-items:center; justify-content:center; font-size:20px;">🎯</div>
-              <div>
-                <div style="font-size:14px; font-weight:600; color:var(--text);">Complete Assignment</div>
-                <div style="font-size:12px; color:var(--text-faint);">Due tomorrow</div>
-              </div>
+      <!-- Goal Coach -->
+      <div class="card goal-coach-card fade-up" style="margin-bottom:var(--spacing-md);">
+        <div class="coach-left">
+          <div class="card-label" style="margin-bottom:var(--spacing-xs);">Goal Coach</div>
+          <div class="coach-input-group">
+            <label>What is your target grade (%)?</label>
+            <div style="display:flex; gap:8px;">
+              <input type="number" id="coach-target-input" class="form-input" placeholder="e.g. 85" min="0" max="100" style="max-width: 120px;">
+              <button class="btn-primary" id="coach-target-save">Save</button>
             </div>
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:40px; height:40px; border-radius:50%; background:var(--bg-soft); display:flex; align-items:center; justify-content:center; font-size:20px;">📖</div>
-              <div>
-                <div style="font-size:14px; font-weight:600; color:var(--text);">Review Notes</div>
-                <div style="font-size:12px; color:var(--text-faint);">For 30 mins</div>
-              </div>
+          </div>
+          <p id="coach-message" class="coach-msg"></p>
+          <button class="btn-secondary" id="coach-motivate-btn" style="margin-top:auto; align-self: flex-start;">Need Motivation?</button>
+        </div>
+        <div class="coach-right">
+          <div class="coach-ring-wrap">
+            <svg width="120" height="120" viewBox="0 0 120 120" class="coach-ring-svg">
+              <circle cx="60" cy="60" r="54" class="coach-ring-bg"></circle>
+              <circle cx="60" cy="60" r="54" class="coach-ring-fill" id="coach-progress-circle"></circle>
+            </svg>
+            <div class="coach-ring-content">
+              <span class="coach-ring-label">GOAL</span>
+              <span class="coach-ring-val pulse-goal" id="coach-goal-display">0%</span>
             </div>
           </div>
         </div>
-
-        <div class="card" style="padding:var(--spacing-sm);">
-          <div class="card-label" style="margin-bottom:var(--spacing-xs);">Weekly Progress</div>
-          <div style="margin-top:16px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <span style="font-size:13px; font-weight:500; color:var(--text);">Study Time (8h / 10h)</span>
-              <span style="font-size:13px; font-weight:600; color:var(--accent);">80%</span>
-            </div>
-            <div style="height:8px; background:var(--bg-soft2); border-radius:99px; overflow:hidden;">
-              <div style="height:100%; width:80%; background:var(--accent); border-radius:99px;"></div>
-            </div>
-          </div>
-          <div style="margin-top:20px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <span style="font-size:13px; font-weight:500; color:var(--text);">Task Completion</span>
-              <span style="font-size:13px; font-weight:600; color:#22c55e;">65%</span>
-            </div>
-            <div style="height:8px; background:var(--bg-soft2); border-radius:99px; overflow:hidden;">
-              <div style="height:100%; width:65%; background:#22c55e; border-radius:99px;"></div>
-            </div>
-          </div>
-        </div>
-
       </div>
 
 
@@ -223,6 +204,7 @@
 <script src="js/tips.js"></script>
 <script src="js/notebook.js"></script>
 <script src="js/timer.js"></script>
+<script src="js/coach.js"></script>
 <script>
 const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const MONTHS    = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];

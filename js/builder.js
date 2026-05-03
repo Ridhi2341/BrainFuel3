@@ -2,16 +2,15 @@
 let state = { days: [], slots: [], subjects: [], grid: {} };
 
 const COLOR_MAP = {
-  os:     { bg: '#516cb4ff', text: '#93c5fd' },
-  fcp:    { bg: '#d49f2cff', text: '#fcd34d' },
-  faa:    { bg: '#7555b1ff', text: '#c4b5fd' },
-  dm:     { bg: '#156040ff', text: '#6ee7b7' },
-  fee:    { bg: '#b12e49ff', text: '#fda4af' },
-  custom: { bg: '#5f97a4ff', text: '#67e8f9' }
+  mint:     { bg: 'linear-gradient(135deg, rgba(168,230,207,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#A8E6CF' },
+  sky:      { bg: 'linear-gradient(135deg, rgba(161,196,253,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#A1C4FD' },
+  lavender: { bg: 'linear-gradient(135deg, rgba(220,214,247,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#DCD6F7' },
+  peach:    { bg: 'linear-gradient(135deg, rgba(255,211,182,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#FFD3B6' },
+  rose:     { bg: 'linear-gradient(135deg, rgba(255,170,165,0.1), rgba(255,255,255,0.1))', text: 'var(--text)', solid: '#FFAAA5' }
 };
 
 const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-let selectedColor = 'os';
+let selectedColor = 'mint';
 let pendingSubject = null;
 let clockInterval = null;
 
@@ -163,8 +162,8 @@ function updateNowBanner() {
     const c = result.color;
     const dot = nowBanner.querySelector('.now-dot');
     if (c) {
-      nowBanner.style.borderColor = c.text + '40';
-      dot.style.background = c.text;
+      nowBanner.style.borderColor = c.solid + '40';
+      dot.style.background = c.solid;
     }
     const subjName = result.subj ? result.subj.name : 'Free period';
     const teacher  = result.subj?.teacher ? ' · ' + result.subj.teacher : '';
@@ -267,7 +266,7 @@ function renderSubjectPreview() {
   document.getElementById('subj-count').textContent = state.subjects.length;
   container.innerHTML = '';
   state.subjects.forEach((s, i) => {
-    const c = COLOR_MAP[s.color] || COLOR_MAP.os;
+    const c = COLOR_MAP[s.color] || COLOR_MAP.mint;
     const card = document.createElement('div');
     card.className = 'subj-chip';
     card.style.background = c.bg;
@@ -290,7 +289,7 @@ document.getElementById('btn-add-subj').addEventListener('click', () => {
   const c = COLOR_MAP[selectedColor];
   document.getElementById('modal-title').textContent = 'Confirm subject';
   document.getElementById('modal-body').innerHTML = `
-    <div class="modal-preview" style="background:${c.bg}; color:${c.text}">
+    <div class="modal-preview" style="background:${c.bg}; color:${c.text}; border: 1px solid ${c.solid};">
       <strong>${name}</strong>${teacher ? '<br/><small>' + teacher + '</small>' : ''}
     </div>
     <p style="margin-top:10px; font-size:13px; color:var(--text-muted)">Does this look right?</p>`;
@@ -364,20 +363,21 @@ function buildGrid() {
 }
 
 function renderCellContent(td, subj) {
-  const c = COLOR_MAP[subj.color] || COLOR_MAP.os;
-  td.innerHTML = `<span class="subj" style="background:${c.bg}; color:${c.text};">${subj.name}${subj.teacher ? '<br/><small>' + subj.teacher + '</small>' : ''}</span>`;
+  const c = COLOR_MAP[subj.color] || COLOR_MAP.mint;
+  td.innerHTML = `<span class="subj" style="background:${c.bg}; color:${c.text}; border: 1px solid ${c.solid};">${subj.name}${subj.teacher ? '<br/><small>' + subj.teacher + '</small>' : ''}</span>`;
 }
 
 function buildPalette() {
   const container = document.getElementById('palette-cards');
   container.innerHTML = '';
   state.subjects.forEach(s => {
-    const c = COLOR_MAP[s.color] || COLOR_MAP.os;
+    const c = COLOR_MAP[s.color] || COLOR_MAP.mint;
     const card = document.createElement('div');
     card.className = 'palette-card';
     card.draggable = true;
     card.style.background = c.bg;
     card.style.color = c.text;
+    card.style.border = `1px solid ${c.solid}`;
     card.innerHTML = `<strong>${s.name}</strong>${s.teacher ? '<br/><small>' + s.teacher + '</small>' : ''}`;
     card.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', s.id); card.classList.add('dragging'); });
     card.addEventListener('dragend', () => card.classList.remove('dragging'));
@@ -452,10 +452,10 @@ function showFinalView() {
   const legend = document.getElementById('tt-legend');
   legend.innerHTML = '';
   state.subjects.forEach(s => {
-    const c = COLOR_MAP[s.color] || COLOR_MAP.os;
+    const c = COLOR_MAP[s.color] || COLOR_MAP.mint;
     const item = document.createElement('div');
     item.className = 'legend-item';
-    item.innerHTML = `<span class="legend-dot" style="background:${c.bg}; border:2px solid ${c.text};"></span>
+    item.innerHTML = `<span class="legend-dot" style="background:${c.bg}; border:2px solid ${c.solid};"></span>
       <span>${s.name}${s.teacher ? ' <small style="opacity:0.6">· ' + s.teacher + '</small>' : ''}</span>`;
     legend.appendChild(item);
   });
