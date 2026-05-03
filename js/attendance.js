@@ -118,7 +118,7 @@ function renderSubjects() {
     card.className = 'subject-card';
     card.style.background = c.bg;
     card.style.color = c.text;
-    card.innerHTML = `
+    card.innerHTML = ` 
       <div class="sc-header">
         <div class="sc-name">${s.name}</div>
         <div class="sc-actions">

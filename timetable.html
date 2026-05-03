@@ -208,9 +208,12 @@
               <div class="now-subject" id="now-subject"></div>
             </div>
           </div>
-          <div class="now-right">
-            <div class="now-time" id="now-clock"></div>
-            <div class="now-ends" id="now-ends"></div>
+          <div class="now-right" style="display: flex; align-items: center; gap: 16px;">
+            <button class="btn-ghost" id="btn-edit-tt-on" type="button" style="border-color: var(--accent); color: var(--accent);">✏️ Edit</button>
+            <div style="text-align: right;">
+              <div class="now-time" id="now-clock"></div>
+              <div class="now-ends" id="now-ends"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -221,8 +224,11 @@
             <span class="now-dot now-dot-off"></span>
             <div class="now-label" id="off-label"></div>
           </div>
-          <div class="now-right">
-            <div class="now-time" id="off-clock"></div>
+          <div class="now-right" style="display: flex; align-items: center; gap: 16px;">
+            <button class="btn-ghost" id="btn-edit-tt-off" type="button" style="border-color: var(--accent); color: var(--accent);">✏️ Edit</button>
+            <div style="text-align: right;">
+              <div class="now-time" id="off-clock"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -239,6 +245,18 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- Edit Options Modal -->
+<div class="modal-overlay hidden" id="edit-modal-overlay">
+  <div class="modal">
+    <div class="modal-title">Edit Timetable</div>
+    <div class="modal-body">Would you like to reset your grid setup or just edit the subjects directly on the grid?</div>
+    <div class="modal-actions" style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+      <button class="btn-secondary" id="modal-edit-reset" type="button">Reset Setup</button>
+      <button class="btn-primary" id="modal-edit-inline" type="button">Edit in Place</button>
+    </div>
   </div>
 </div>
 

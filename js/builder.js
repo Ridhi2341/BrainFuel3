@@ -341,7 +341,7 @@ function buildGrid() {
       td.dataset.key = key;
       if (state.grid[key]) {
         const subj = state.subjects.find(s => s.id === state.grid[key]);
-        if (subj) renderCellContent(td, subj);
+        if (subj) renderCellContent(td, subj, key);
       }
       td.addEventListener('dragover', e => { e.preventDefault(); td.classList.add('drag-over'); });
       td.addEventListener('dragleave', () => td.classList.remove('drag-over'));
@@ -349,7 +349,7 @@ function buildGrid() {
         e.preventDefault(); td.classList.remove('drag-over');
         const subjId = e.dataTransfer.getData('text/plain');
         const subj   = state.subjects.find(s => s.id === subjId);
-        if (subj) { state.grid[key] = subjId; saveState(); renderCellContent(td, subj); }
+        if (subj) { state.grid[key] = subjId; saveState(); renderCellContent(td, subj, key); }
       });
       td.addEventListener('click', () => {
         if (state.grid[key]) { delete state.grid[key]; saveState(); td.innerHTML = ''; }
@@ -362,9 +362,9 @@ function buildGrid() {
   buildPalette();
 }
 
-function renderCellContent(td, subj) {
+function renderCellContent(td, subj, key) {
   const c = COLOR_MAP[subj.color] || COLOR_MAP.mint;
-  td.innerHTML = `<span class="subj" style="background:${c.bg}; color:${c.text}; border: 1px solid ${c.solid};">${subj.name}${subj.teacher ? '<br/><small>' + subj.teacher + '</small>' : ''}</span>`;
+  td.innerHTML = `<span class="subj" style="background:${c.bg}; color:${c.text}; border: 1px solid ${c.solid};">${subj.name}${subj.teacher ? '<br/><small>' + subj.teacher + '</small>' : ''}<button class="subj-delete-btn" data-key="${key || ''}" type="button">×</button></span>`;
 }
 
 function buildPalette() {
@@ -440,7 +440,7 @@ function showFinalView() {
       if (di === todayIdx) td.classList.add('today-col');
       if (state.grid[key]) {
         const subj = state.subjects.find(s => s.id === state.grid[key]);
-        if (subj) renderCellContent(td, subj);
+        if (subj) renderCellContent(td, subj, key);
       }
       tr.appendChild(td);
     });
@@ -534,7 +534,7 @@ function editHandler() {
   document.getElementById('final-view').classList.add('hidden');
   document.getElementById('wizard').classList.remove('hidden');
   document.querySelectorAll('#days-check input').forEach(cb => { cb.checked = state.days.includes(cb.value); });
-  renderSlots(); renderSubjectPreview(); buildGrid(); setStep(3);
+  renderSlots(); renderSubjectPreview(); buildGrid(); setStep(1);
 }
 
 function resetHandler() {
@@ -548,6 +548,53 @@ function resetHandler() {
   document.getElementById('wizard').classList.remove('hidden');
   renderSlots(); renderSubjectPreview(); setStep(1);
 }
+
+let isEditMode = false;
+function toggleEditMode() {
+  isEditMode = !isEditMode;
+  const table = document.getElementById('tt-final');
+  if (!table) return;
+  if (isEditMode) {
+    table.classList.add('edit-mode');
+    document.getElementById('btn-edit-tt-on').innerHTML = '✅ Done';
+    document.getElementById('btn-edit-tt-off').innerHTML = '✅ Done';
+  } else {
+    table.classList.remove('edit-mode');
+    document.getElementById('btn-edit-tt-on').innerHTML = '✏️ Edit';
+    document.getElementById('btn-edit-tt-off').innerHTML = '✏️ Edit';
+  }
+}
+
+document.addEventListener('click', e => {
+  if (e.target.id === 'btn-edit-tt-on' || e.target.id === 'btn-edit-tt-off') {
+    if (isEditMode) {
+      toggleEditMode();
+    } else {
+      document.getElementById('edit-modal-overlay').classList.remove('hidden');
+    }
+  }
+  
+  if (e.target.id === 'modal-edit-reset') {
+    document.getElementById('edit-modal-overlay').classList.add('hidden');
+    editHandler();
+  }
+  
+  if (e.target.id === 'modal-edit-inline') {
+    document.getElementById('edit-modal-overlay').classList.add('hidden');
+    toggleEditMode();
+  }
+  
+  if (e.target.classList.contains('subj-delete-btn')) {
+    const key = e.target.dataset.key;
+    if (state.grid[key]) {
+      delete state.grid[key];
+      saveState();
+      const td = e.target.closest('td');
+      if (td) td.innerHTML = '';
+      updateNowBanner();
+    }
+  }
+});
 
 // ── Init ─────────────────────────────────────────────────────────
 (function init() {
